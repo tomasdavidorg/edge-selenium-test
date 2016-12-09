@@ -8,7 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 public class EdgeSimpleTest {
 
     @Test
-    public void main() throws InterruptedException {
+    public void searchDogOnGoogleTest() throws InterruptedException {
 
         System.setProperty("webdriver.edge.driver", "C:\\Selenium\\MicrosoftWebDriver.exe");
         WebDriver driver = new EdgeDriver();
@@ -27,7 +27,7 @@ public class EdgeSimpleTest {
     }
 
     @Test
-    public void test() throws InterruptedException {
+    public void openGoogleTest() throws InterruptedException {
         System.setProperty("webdriver.edge.driver", "C:\\Selenium\\MicrosoftWebDriver.exe");
         EdgeDriver driver = new EdgeDriver();
         driver.get("http://www.google.com");
