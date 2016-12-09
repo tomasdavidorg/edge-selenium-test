@@ -1,0 +1,10 @@
+/.*
+/**/.*
+!.gitignore
+/nbproject
+*.ipr
+*.iws
+*.iml
+
+/target
+/local
