@@ -3,7 +3,7 @@
             xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 
     <extension qualifier="webdriver">
-        <property name="browser">MicrosoftEdge</property>
+        <property name="browser">edge</property>
         <property name="edgeDriverBinary">C:\Selenium\MicrosoftWebDriver.exe</property>
     </extension>
 </arquillian>
