@@ -1,61 +1,51 @@
-import java.io.File;
-
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.Graphene;
+import org.jboss.arquillian.graphene.findby.ByJQuery;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.theories.Theories;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 @RunWith(Arquillian.class)
 public class EdgeSimpleTest {
 
-//    private static final String EDGE_WEBDRIVER_PROPERTY = "webdriver.edge.driver";
-
     @Drone
     private WebDriver driver;
 
-    @Before
-    public void setUp() {
-//        System.setProperty(EDGE_WEBDRIVER_PROPERTY, "C:\\Selenium\\MicrosoftWebDriver.exe");
-    }
-
     @Test
     public void searchDogOnGoogleTest() throws InterruptedException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("index.html").getFile());
+        driver.get("http://localhost:8080/business-central");
 
-        driver.get("file://" + file.getAbsolutePath());
+        Thread.sleep(1000);
 
-        WebElement firstDiv = driver.findElement(By.className("first"));
-        Assert.assertTrue(firstDiv.getText().equals("Hello world!"));
+        WebElement name = driver.findElement(ByJQuery.selector("input[name='j_username']"));
+        name.sendKeys("testadmin");
 
-        WebElement addDivButton = driver.findElement(By.className("button"));
-        addDivButton.click();
+        WebElement pass = driver.findElement(ByJQuery.selector("input[name='j_password']"));
+        pass.sendKeys("admin1234;");
 
-        WebElement secondDiv = driver.findElement(By.className("second"));
-        SecondDiv secondDivFrag = Graphene.createPageFragment(SecondDiv.class,
-                                                             secondDiv);
+        WebElement button = driver.findElement(ByJQuery.selector("input.button"));
+        button.click();
 
+        Thread.sleep(10000);
 
-        Assert.assertTrue(secondDivFrag.getDivText().equals("Goodbye world!"));
-        secondDivFrag.setInput("ssdadasd");
-        Thread.sleep(5000);
+        driver.findElement(ByJQuery.selector("td > a:contains('Project Authoring')")).click();
+        Thread.sleep(500);
+        driver.findElement(ByJQuery.selector("a:contains('Teams')")).click();
+        Thread.sleep(500);
+        driver.findElement(ByJQuery.selector("button:contains('Create Team')")).click();
+        Thread.sleep(500);
+
+        Modal pageFragment = Graphene.createPageFragment(Modal.class,
+                                                         driver.findElement(By.className("modal-dialog")));
+        pageFragment.setInput("adasdasdas");
+        Thread.sleep(2000);
     }
 
-    @After
-    public void clean() {
-//        System.clearProperty(EDGE_WEBDRIVER_PROPERTY);
-//        if (driver != null) {
-//            driver.quit();
-//        }
-    }
 
 }
