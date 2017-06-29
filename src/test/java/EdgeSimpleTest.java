@@ -19,7 +19,7 @@ public class EdgeSimpleTest {
 
     @Test
     public void searchDogOnGoogleTest() throws InterruptedException {
-        driver.get("http://localhost:8080/business-central");
+        driver.get("http://10.202.13.147:8080/business-central");
 
         Thread.sleep(1000);
 
@@ -32,17 +32,21 @@ public class EdgeSimpleTest {
         WebElement button = driver.findElement(ByJQuery.selector("input.button"));
         button.click();
 
-        Thread.sleep(10000);
+        Thread.sleep(15000);
 
         driver.findElement(ByJQuery.selector("td > a:contains('Project Authoring')")).click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         driver.findElement(ByJQuery.selector("a:contains('Teams')")).click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         driver.findElement(ByJQuery.selector("button:contains('Create Team')")).click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
 
         Modal pageFragment = Graphene.createPageFragment(Modal.class,
                                                          driver.findElement(By.className("modal-dialog")));
+        pageFragment.setInput("aaa");
+        WebElement webelement = pageFragment.getWebelement();
+        webelement.clear();
+        webelement.sendKeys("sdasdas");
         pageFragment.setInput("adasdasdas");
         Thread.sleep(2000);
     }

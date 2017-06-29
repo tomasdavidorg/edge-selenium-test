@@ -6,8 +6,14 @@ public class Modal {
     @FindByJQuery("input[data-field='name']")
     WebElement thirdInput;
 
+    public WebElement getWebelement() {
+        return thirdInput;
+    }
+
     public void setInput(String text) {
+        thirdInput.clear();
         thirdInput.sendKeys(text);
+        thirdInput.clear();
     }
 
 }
