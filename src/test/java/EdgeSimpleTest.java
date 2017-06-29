@@ -1,6 +1,7 @@
 import java.io.File;
 
 import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.After;
 import org.junit.Assert;
@@ -40,7 +41,13 @@ public class EdgeSimpleTest {
         addDivButton.click();
 
         WebElement secondDiv = driver.findElement(By.className("second"));
-        Assert.assertTrue(secondDiv.getText().equals("Goodbye world!"));
+        SecondDiv secondDivFrag = Graphene.createPageFragment(SecondDiv.class,
+                                                             secondDiv);
+
+
+        Assert.assertTrue(secondDivFrag.getDivText().equals("Goodbye world!"));
+        secondDivFrag.setInput("ssdadasd");
+        Thread.sleep(5000);
     }
 
     @After
