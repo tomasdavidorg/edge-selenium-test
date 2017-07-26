@@ -10,7 +10,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 
 public class EdgeSimpleTest {
 
-    private static final String DROOLS_WB_URL = "http://kieci-02.lab.eng.brq.redhat.com:32867/kie-drools-wb/kie-drools-wb.jsp";
+    private static final String DROOLS_WB_URL = "http://www.patternfly.org/pattern-library/communication/wizard/#/code";
 
     private WebDriver driver;
 
@@ -24,26 +24,13 @@ public class EdgeSimpleTest {
     public void searchDogOnGoogleTest() throws InterruptedException {
         driver.get(DROOLS_WB_URL);
 
-        // login into kie-wb
-        WebElement name = driver.findElement(By.cssSelector("input[name='j_username']"));
-        name.sendKeys("admin");
-        WebElement pass = driver.findElement(By.cssSelector("input[name='j_password']"));
-        pass.sendKeys("admin");
-        WebElement button = driver.findElement(By.cssSelector("input.button"));
-        button.click();
-        Thread.sleep(15000);
+        WebElement launchButton = driver.findElement(By.cssSelector("button.wizard-pf-open"));
+        launchButton.click();
 
-        // Open Project Authoring - Teams
-        WebElement tableWithLinks = driver.findElement(By.cssSelector("table.well"));
-        tableWithLinks.findElement(By.linkText("Project Authoring")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.linkText("Teams")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("button.btn-primary")).click();
         Thread.sleep(1000);
 
         // interact with name input
-        WebElement nameInput = driver.findElement(By.cssSelector("input[data-field='name']"));
+        WebElement nameInput = driver.findElement(By.cssSelector("input[data-id='textInput-markup']"));
         nameInput.sendKeys("MyTeam");
         nameInput.clear(); //org.openqa.selenium.ElementNotVisibleException: Element not displayed
     }
